@@ -5,8 +5,8 @@ function Letter({ letterPos, attemptVal }) {
   const { board, correctWord, currAttempt, setDisabledLetters } = useContext(AppContext);
   const letter = board[attemptVal][letterPos];
 
-  const correct = correctWord[letterPos] === letter;
-  const almost = !correct && letter !== "" && correctWord.includes(letter);
+  const correct = correctWord.toUpperCase()[letterPos] === letter;
+  const almost = !correct && letter !== "" && correctWord.toUpperCase().includes(letter);
 
   const letterState =
     currAttempt.attempt > attemptVal &&
@@ -19,7 +19,6 @@ function Letter({ letterPos, attemptVal }) {
     }, [currAttempt.attempt]);
   return (
     <div className="letter" id={letterState}>
-      {" "}
       {letter}
     </div>
   );

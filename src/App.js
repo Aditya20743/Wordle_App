@@ -1,25 +1,28 @@
 import "./App.css";
-import { useEffect, useState } from "react";
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
 import { boardDefault, generateWordSet } from "./Words";
-import { createContext } from "react";
-
+import React, { useState, createContext, useEffect } from "react";
+import GameOver from "./components/GameOver";
 export const AppContext = createContext();
 
 function App() {
   const [board, setBoard] = useState(boardDefault);
   const [currAttempt, setCurrAttempt] = useState({ attempt: 0, letterPos: 0 });
   const [wordSet, setWordSet] = useState(new Set());
+  const [correctWord, setCorrectWord] = useState("");
   const [disabledLetters, setDisabledLetters] = useState([]);
-
-  const correctWord = "RIGHT";
-
-  useEffect(()=>{
-    generateWordSet().then((words)=>{
+  const [gameOver,setGameOver] = useState({
+    gameOver: false,
+    guessedWord: false,
+  });
+  
+  useEffect(() => {
+    generateWordSet().then((words) => {
       setWordSet(words.wordSet);
-    })
-  })
+      setCorrectWord(words.todaysWord);
+    });
+  }, []);
 
   const onSelectLetter = (KeyVal) => {
     if (currAttempt.letterPos > 4) return;
@@ -51,8 +54,18 @@ function App() {
       alert("Word Not Found");
     }
 
-    if(currWord=== correctWord){
-      alert("You Guessed It Right 🔥");
+    if (currWord.trim().toLowerCase() === correctWord.trim().toLowerCase()) {
+      setGameOver({gameOver: true, guessedWord: true})
+      return;
+    }
+    // if(currWord.toLowerCase()=== correctWord){
+    //   setGameOver({gameOver: true, guessedWord: true});
+    //   return ;
+    // }
+
+    if(currAttempt.attempt=== 5){
+      setGameOver({gameOver: true,guessedWord: false});
+      return ;
     }
 
   };
@@ -74,11 +87,13 @@ function App() {
           correctWord,
           setDisabledLetters,
           disabledLetters,
+          setGameOver,
+          gameOver,
         }}
       >
         <div className="game">
           <Board />
-          <Keyboard />
+          {gameOver.gameOver ? <GameOver/> : <Keyboard/>}
         </div>
       </AppContext.Provider>
     </div>
