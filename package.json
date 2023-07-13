@@ -1,4 +1,5 @@
 {
+  "homepage": "https://Aditya20743.github.io/Wordle_App",
   "name": "wordle",
   "version": "0.1.0",
   "private": true,
@@ -13,6 +14,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -35,5 +38,8 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@3.6.1"
+  "packageManager": "yarn@3.6.1",
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  }
 }
