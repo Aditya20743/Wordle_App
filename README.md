@@ -1,3 +1,11 @@
+Hello Guys,
+
+I Created a fun Wordle Clone Application Using React.js
+
+You can play the game here 
+[DEMO LINK](https://aditya20743.github.io/Wordle_App/)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
