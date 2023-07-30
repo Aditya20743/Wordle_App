@@ -1,4 +1,4 @@
-Hello Guys,
+Hello 👋,
 
 I Created a fun Wordle Clone Application Using React.js
 
